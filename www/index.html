@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="starter">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+  </head>
+  <body  ng-controller= 'runningCtrl'>
+
+    <ion-pane ng-if="state == 'home'">
+      <button  class="button button-positive" style=" position: absolute; top: 40%; left:40%;width: 170px;height: 170px;font-size: 24px;border-radius: 135px;" ng-click="start()">Let's Start</button>
+    </ion-pane>
+    
+    <div ng-if="state == 'loading'">
+      <img style=" position: absolute; top: 35%; left:25%;width: 170px;height: 170px;" src="./img/ajax-loader.gif" alt="">
+    </div>
+    
+    <div ng-if="state == 'running'">
+      {{distance}}
+      <h1 style=" position: absolute; top: 30%; left: 26%;">{{destination.name}}</h1>
+      <img style="position: absolute; top: 45%; left: 20%; width: 75px;height: 75px;" src="./img/timer.gif" alt="">
+      <h1 style=" position: absolute; top: 44%; left: 45%;">&nbsp;&nbsp;:&nbsp;&nbsp;{{lifeTime}}</h1>
+    </div>
+
+    <div ng-if="state == 'gameover'">
+      <div class="button button-positive" style="position: absolute; top: 10%; left:6%; font-size: 32px;">
+        <b>G</b>
+      </div>
+      <div class="button button-calm" style="position: absolute; top: 10%; left:24%; font-size: 32px;">
+        <b>A</b>
+      </div>
+      <div class="button button-positive" style="position: absolute; top: 10%; left:42%; font-size: 32px;">
+        <b>M</b>
+      </div>
+      <div class="button button-calm" style="position: absolute; top: 10%; left:60%; font-size: 32px;">
+        <b>E</b>
+      </div>
+      <div class="button button-positive" style="position: absolute; top: 20%; left:24%; font-size: 32px;">
+        <b>O</b>
+      </div>
+      <div class="button button-calm" style="position: absolute; top: 20%; left:42%; font-size: 32px;">
+        <b>V</b>
+      </div>
+      <div class="button button-positive" style="position: absolute; top: 20%; left:60%; font-size: 32px;">
+        <b>E</b>
+      </div>
+      <div class="button button-calm" style="position: absolute; top: 20%; left:78%; font-size: 32px;">
+        <b>R</b>
+      </div>
+      <div style="position: absolute; top: 40%; left:40%; font-size: 28px;">
+        <b>{{historyPoints.length}} จุด</b>
+      </div>            
+      <div ng-repeat="point in historyPoints" style="position: absolute; top: 48%; left:10%; font-size: 24px;">
+        <b>{{point.time}} : {{point.data.name}}</b>
+      </div>   
+      <!-- <h2 ng-repeat="point in historyPoints">{{point.time}} : {{point.data.name}}</h2> -->
+      <button  class="button button-positive" style="width: 85px;height: 85px;font-size: 16px;border-radius: 135px; position: absolute; top: 80%; left:36%;" ng-click="resetGame()">Again</button>
+    </div>
+
+
+  </body>
+</html>
